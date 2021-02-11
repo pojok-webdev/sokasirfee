@@ -1,9 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Settings</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
   <ion-button (click)="initData()">Init data</ion-button>
+  <ion-button (click)="fetchData()">Fetch Data</ion-button>
+  <ion-list>
+    <ion-list-header>
+      List of Commodities
+    </ion-list-header>
+
+    <ion-item *ngFor="let dt of data">
+      <ion-avatar slot="start">
+        <img src="../../assets/shapes.svg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{dt.name}}</h2>
+        <h3>{{dt.price}}</h3>
+        <p>{{dt.amount}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

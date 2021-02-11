@@ -10,7 +10,9 @@ export class SettingsPage implements OnInit {
   data
   constructor(
     private db: DbService
-  ) { }
+  ) {
+    this.fetchData()
+  }
   initData(){
     this.db.doInit()
   }
