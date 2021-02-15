@@ -36,6 +36,15 @@ export class SettingsPage implements OnInit {
       }
     })
   }
+  removeCommodity(obj){
+    this.db.deleteCommodity(obj.id)
+    .then(()=>{
+      this.fetchData()
+    })
+    .catch(err=>{
+      console.log("Err",err)
+    })
+  }
   ngOnInit() {
   }
   gotoSingle(dt){

@@ -28,6 +28,7 @@
         <h3>{{dt.price}}</h3>
         <p>{{dt.amount}}</p>
       </ion-label>
+      <ion-button slot="end" (click)="removeCommodity(dt)"><ion-icon name="trash-bin-outline"></ion-icon></ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
