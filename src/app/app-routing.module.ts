@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'single/:id',
+    loadChildren: () => import('./single/single.module').then( m => m.SinglePageModule)
+  },
+  {
+    path: 'addcommodity',
+    loadChildren: () => import('./addcommodity/addcommodity.module').then( m => m.AddcommodityPageModule)
   }
 ];
 

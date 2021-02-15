@@ -13,7 +13,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 })
 
 export class DbService {
-  private storage: SQLiteObject;
+  public storage: SQLiteObject;
   songsList = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -25,6 +25,11 @@ export class DbService {
   ) {
     //doInit
   }
+  pujiGetData(){
+    this.platform.ready().then(()=>{
+      
+    })
+  }
   doInit(){
     this.platform.ready().then(() => {
       this.sqlite.create({
@@ -33,10 +38,9 @@ export class DbService {
       })
       .then((db: SQLiteObject) => {
           this.storage = db;
-          this.getFakeData();
+          this.getCommodities()
       });
     });
-
   }
   dbState() {
     return this.isDbReady.asObservable();
@@ -60,6 +64,22 @@ export class DbService {
           .catch(error => console.error(error));
       });
     }
+    getRealdata(){
+      this.httpClient.get(
+        'assets/getdata.sql',
+        {responseType: 'text'}
+      ).subscribe(data => {
+        this.sqlPorter.importSqlToDb(this.storage, data)
+          .then(_ => {
+            this.getCommodities();
+            this.isDbReady.next(true);
+          })
+          .catch(error => console.error(error));
+      });
+    }
+    save(obj){
+      this.storage.executeSql("insert into commodities (name,price,amount,img) values ('"+obj.name+"',"+obj.price+","+obj.amount+",'../../assets/catalog/ayam-bakar-lezza.png')")
+    }
 
   // Get list
   getCommodities(){
@@ -77,14 +97,13 @@ export class DbService {
       this.songsList.next(items);
     });
   }
-
   // Add
-  addCommodity(artist_name, song_name) {
-    let data = [artist_name, song_name];
+  addCommodity(obj) {
+    let data = [obj.name, obj.price];
     return this.storage.executeSql('INSERT INTO commodities (name, price) VALUES (?, ?)', data)
-    .then(res => {
+    /*.then(res => {
       this.getCommodities();
-    });
+    });*/
   }
 
   // Get single object

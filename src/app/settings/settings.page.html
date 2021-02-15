@@ -4,20 +4,23 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> Settings</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addCommodity()"><ion-icon name="add-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="initData()">Init data</ion-button>
-  <ion-button (click)="fetchData()">Fetch Data</ion-button>
+  <ion-button (click)="initData()" expand="full">Restore Factory data</ion-button>
+
   <ion-list>
     <ion-list-header>
-      List of Commodities
+      Commodities
     </ion-list-header>
 
     <ion-item *ngFor="let dt of data">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" (click)="gotoSingle(dt)">
         <img src="../../assets/shapes.svg">
       </ion-avatar>
       <ion-label>

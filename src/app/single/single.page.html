@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{obj.name}}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-button (click)="removeObj()" expand="full"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    <ion-list>
+    <ion-item>
+      <img src="../../assets/shapes.svg" alt="">
+    </ion-item>
+  </ion-list>
+</ion-content>

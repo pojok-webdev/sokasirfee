@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> {{status}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list lines="full" class="ion-no-margin">
+    <ion-list-header lines="full">
+      <ion-button (click)="saveCommodity(obj)"><ion-icon name="save-outline"></ion-icon></ion-button>
+    </ion-list-header>
+    <ion-item>
+      <ion-label position="stacked">Nama</ion-label>
+      <ion-input placeholder="placeholder" [(ngModel)]="obj.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Harga</ion-label>
+      <ion-input placeholder="placeholder" [(ngModel)]="obj.price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Jumlah</ion-label>
+      <ion-input placeholder="placeholder" [(ngModel)]="obj.amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" slot="start">Image</ion-label>
+      <ion-button slot="end"><ion-icon name="image-outline"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

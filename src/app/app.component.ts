@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
+import { DbService } from './service/db.service';
 
 @Component({
   selector: 'app-root',
@@ -30,13 +31,15 @@ export class AppComponent {
   public labels = ['PadiNET', 'Kasir'];
 
   constructor(
-    private platform: Platform,
+    private platform: Platform,private db: DbService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.db.doInit()
+      this.db.getRealdata()
 //      this.statusBar.styleDefault();
     });
   }

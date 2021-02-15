@@ -44,11 +44,26 @@ cart = []
     private db: DbService
     ) {
     this.sumCart()
-    this.db.dbState().subscribe(res=>{
+    this.db.getRealdata()
+    this.wakeDb(()=>{
+      this.db.fetchCommodities().subscribe(item=>{
+        this.mydata = item
+      })
+    })
+/*    this.db.dbState().subscribe(res=>{
       if(res){
+        this.db.getCommodities()
         this.db.fetchCommodities().subscribe(item=>{
           this.mydata = item
         })
+      }
+    })*/
+  }
+  wakeDb(callback){
+    this.db.dbState().subscribe(res=>{
+      if(res){
+        this.db.getCommodities()
+        callback()
       }
     })
   }
