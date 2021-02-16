@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DbService } from '../service/db.service';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { AddcommodityPage } from '../addcommodity/addcommodity.page';
 
 @Component({
   selector: 'app-settings',
@@ -12,8 +14,11 @@ export class SettingsPage implements OnInit {
   message = "data belum di atur"
   constructor(
     private db: DbService,
-    private route:Router
+    private route:Router,
+    private modalController: ModalController
   ) {
+  }
+  refreshData(){
     this.db.getRealdata()
     this.fetchData()
   }
@@ -46,6 +51,8 @@ export class SettingsPage implements OnInit {
     })
   }
   ngOnInit() {
+    this.db.getRealdata()
+    this.fetchData()
   }
   gotoSingle(dt){
     this.route.navigate(['/single/'+dt.id])
@@ -53,7 +60,15 @@ export class SettingsPage implements OnInit {
   gotopage(){
     this.route.navigate(['/commodities'])
   }
-  addCommodity(){
-    this.route.navigate(['/addcommodity'])
+  async addCommodity(){
+    let modal = await this.modalController.create({
+      component: AddcommodityPage,
+      componentProps:{}
+    })
+    modal.onDidDismiss().then(res=>{
+      this.fetchData()
+    })
+    return await modal.present()
+//    this.route.navigate(['/addcommodity'])
   }
 }

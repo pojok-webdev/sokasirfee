@@ -53,7 +53,7 @@ export class DbService {
     // Render fake data
     getFakeData() {
       this.httpClient.get(
-        'assets/init.sql',
+        'assets/restorefactory.sql',
         {responseType: 'text'}
       ).subscribe(data => {
         this.sqlPorter.importSqlToDb(this.storage, data)
