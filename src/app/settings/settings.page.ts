@@ -18,15 +18,12 @@ export class SettingsPage implements OnInit {
     private modalController: ModalController
   ) {
   }
-  refreshData(){
-    this.db.getRealdata()
-    this.fetchData()
-  }
   initData(){
     this.db.getFakeData()
   }
   getRealData(){
     this.db.getRealdata()
+    this.fetchData()
   }
   fetchData(){
     this.db.getCommodities();
@@ -69,6 +66,5 @@ export class SettingsPage implements OnInit {
       this.fetchData()
     })
     return await modal.present()
-//    this.route.navigate(['/addcommodity'])
   }
 }

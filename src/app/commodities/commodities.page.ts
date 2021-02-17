@@ -50,14 +50,6 @@ cart = []
         this.mydata = item
       })
     })
-/*    this.db.dbState().subscribe(res=>{
-      if(res){
-        this.db.getCommodities()
-        this.db.fetchCommodities().subscribe(item=>{
-          this.mydata = item
-        })
-      }
-    })*/
   }
   wakeDb(callback){
     this.db.dbState().subscribe(res=>{

@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS commodities(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT, 
-    price decimal(14,2)
+    price decimal(14,2),
+    img text,
+    amount decmimal(14,2)
 );
 
 select * from commodities;

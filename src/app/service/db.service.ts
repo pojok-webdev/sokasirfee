@@ -38,7 +38,6 @@ export class DbService {
       })
       .then((db: SQLiteObject) => {
           this.storage = db;
-          this.getCommodities()
       });
     });
   }
