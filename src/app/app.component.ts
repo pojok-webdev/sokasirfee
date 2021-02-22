@@ -39,7 +39,8 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.db.doInit()
-      this.db.getRealdata()
+      //this.db.getRealdata()
+      this.db.getFakeData()
 //      this.statusBar.styleDefault();
     });
   }

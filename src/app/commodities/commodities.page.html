@@ -45,7 +45,7 @@
     <ion-row *ngFor="let commodity of mydata">
       <ion-col>
         <div>
-          <img (click)="addTotal(commodity)" src="../../assets/shapes.svg" alt="{{commodity.name}}">
+          <img (click)="addTotal(commodity)" src="{{commodity.img}}" alt="{{commodity.name}}">
           <ion-button slot="start" (click)="reduceAmount(commodity)">
               <ion-icon name="remove"></ion-icon>
           </ion-button>
@@ -58,14 +58,14 @@
       </ion-col>
       <ion-col>
         <div>
-          <img (click)="addTotal(commodity)" src="../../assets/shapes.svg" alt="{{commodity.name}}">
-          <ion-button slot="start" (click)="reduceAmount(commodity)">
-              <ion-icon name="remove"></ion-icon>
-          </ion-button>
-          <ion-button color="{{cekAmount(getAmount(commodity.id))}}">{{getAmount(commodity.id)}}</ion-button>
-          <ion-button slot="end" (click)="addTotal(commodity)">
-              <ion-icon name="add"></ion-icon>
-          </ion-button>
+          <ion-list>
+            <ion-item>
+              <ion-label>{{commodity.name}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{commodity.amount}}</ion-label>
+            </ion-item>
+          </ion-list>
         </div>
       </ion-col>
     </ion-row>

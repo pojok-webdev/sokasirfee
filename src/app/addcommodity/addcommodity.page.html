@@ -25,8 +25,11 @@
       <ion-input placeholder="placeholder" [(ngModel)]="obj.amount"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-img [src]="myimg"></ion-img>
+    </ion-item>
+    <ion-item>
       <ion-label position="floating" slot="start">Image</ion-label>
-      <ion-button slot="end"><ion-icon name="image-outline"></ion-icon></ion-button>
+      <ion-input type="file" (change)="uploadImage($event)" slot="end"><ion-icon name="image-outline"></ion-icon></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

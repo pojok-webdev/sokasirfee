@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS commodities(
     name TEXT, 
     price decimal(14,2),
     img text,
-    amount decmimal(14,2)
+    amount decimal(14,2)
 );
 
 INSERT or IGNORE INTO commodities(id, name, price,amount,img) VALUES (1, 'Ayam Bakar Lezaa', 15000,1,'../../assets/catalog/ayam-bakar-lezaa.png');

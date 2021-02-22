@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class DbService {
   doInit(){
     this.platform.ready().then(() => {
       this.sqlite.create({
-        name: 'positronx_db.db',
+//        name: 'positronx_db.db',
+        name:'toko.db',
         location: 'default'
       })
       .then((db: SQLiteObject) => {
@@ -76,9 +78,9 @@ export class DbService {
           .catch(error => console.error(error));
       });
     }
-    save(obj){
+/*    save(obj){
       this.storage.executeSql("insert into commodities (name,price,amount,img) values ('"+obj.name+"',"+obj.price+","+obj.amount+",'../../assets/catalog/ayam-bakar-lezza.png')")
-    }
+    }*/
 
   // Get list
   getCommodities(){
@@ -89,7 +91,7 @@ export class DbService {
           items.push({
             id: res.rows.item(i).id,
             name: res.rows.item(i).name,
-            price: res.rows.item(i).price,img:'',amount:1
+            price: res.rows.item(i).price,img:res.rows.item(i).img,amount:res.rows.item(i).amount
            });
         }
       }
@@ -98,11 +100,8 @@ export class DbService {
   }
   // Add
   addCommodity(obj) {
-    let data = [obj.name, obj.price];
-    return this.storage.executeSql('INSERT INTO commodities (name, price) VALUES (?, ?)', data)
-    /*.then(res => {
-      this.getCommodities();
-    });*/
+    let data = [obj.name, obj.price,2,'../../assets/catalog/salad-merdeka.png'];
+    return this.storage.executeSql('INSERT INTO commodities (name, price,amount,img) VALUES (?,?, ?,?)', data)
   }
 
   // Get single object
@@ -111,7 +110,7 @@ export class DbService {
       return {
         id: res.rows.item(0).id,
         name: res.rows.item(0).name,
-        price: res.rows.item(0).price,img:'',amount:1
+        price: res.rows.item(0).price,img:res.row.item(0).img,amount:res.row.item(0).amount
       }
     });
   }
