@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
-import { isNgTemplate } from '@angular/compiler';
+import { ImageService } from '../image.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,7 @@ export class DbService {
     private sqlite: SQLite,
     private httpClient: HttpClient,
     private sqlPorter: SQLitePorter,
+    private imageService: ImageService
   ) {
     //doInit
   }
@@ -35,7 +36,7 @@ export class DbService {
     this.platform.ready().then(() => {
       this.sqlite.create({
 //        name: 'positronx_db.db',
-        name:'toko.db',
+        name:'free.db',
         location: 'default'
       })
       .then((db: SQLiteObject) => {
@@ -88,19 +89,21 @@ export class DbService {
       let items: Commodities[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
+          this.imageService.createImageFromBlob(res.rows.item(i).img,_img=>{
+          })
           items.push({
             id: res.rows.item(i).id,
             name: res.rows.item(i).name,
             price: res.rows.item(i).price,img:res.rows.item(i).img,amount:res.rows.item(i).amount
-           });
-        }
+           });  
+      }
       }
       this.songsList.next(items);
     });
   }
   // Add
   addCommodity(obj) {
-    let data = [obj.name, obj.price,2,'../../assets/catalog/salad-merdeka.png'];
+    let data = [obj.name, obj.price,obj.amount,obj.img];
     return this.storage.executeSql('INSERT INTO commodities (name, price,amount,img) VALUES (?,?, ?,?)', data)
   }
 

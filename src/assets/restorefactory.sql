@@ -1,5 +1,5 @@
 CREATE TABLE commodities(
-    id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price real, img text, amount real
+    id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price real, blob text, amount real
 );
 
 INSERT INTO commodities(id, name, price,amount,img) VALUES (1, 'Ayam Bakar Lezaa', 15000,1,'../../assets/catalog/ayam-bakar-lezaa.png');
